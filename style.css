@@ -1,56 +1,8 @@
 :root {
     --bg-side: #ffffff;
     --text-color: #3E2723;
-    --orange-accent: #FF8C00; /* Насыщенный оранжевый */
+    --orange-accent: #FF8C00;
 }
-
-/* Стили для кнопок-ссылок в меню, если хочешь сделать одну из них оранжевой */
-.nav-btn-orange {
-    color: var(--orange-accent) !important;
-    border: 1px solid var(--orange-accent);
-    padding: 5px 10px;
-    border-radius: 15px;
-}
-
-/* Кнопка КОРЗИНЫ */
-.cart-btn-orange {
-    background: none;
-    border: 2px solid var(--orange-accent);
-    color: var(--orange-accent); /* Красит иконку SVG (благодаря fill="currentColor") */
-    padding: 12px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: 0.3s;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.cart-btn-orange:hover {
-    background-color: var(--orange-accent);
-    color: white;
-}
-
-/* Центральная кнопка КАТАЛОГА */
-.btn-catalog-center {
-    background-color: var(--orange-accent);
-    color: white;
-    padding: 20px 45px;
-    border: none;
-    border-radius: 50px;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 8px 25px rgba(255, 140, 0, 0.4);
-    transition: 0.3s ease;
-}
-
-.btn-catalog-center:hover {
-    transform: scale(1.1);
-    background-color: #e67e00; /* Чуть темнее при наведении */
-}
-
-/* Остальные стили sidebar и контейнера остаются как в прошлом шаге */
 
 * {
     margin: 0;
@@ -61,8 +13,8 @@
 body, html {
     height: 100%;
     font-family: 'Montserrat', sans-serif;
-    background-color: var(--bg-side);
     color: var(--text-color);
+    overflow: hidden; /* Чтобы не было лишних скроллов */
 }
 
 .main-container {
@@ -71,7 +23,7 @@ body, html {
     width: 100%;
 }
 
-/* --- ЛЕВАЯ ПАНЕЛЬ (20%) --- */
+/* --- SIDEBAR (20%) --- */
 .sidebar {
     width: 20%;
     min-width: 250px;
@@ -81,16 +33,16 @@ body, html {
     flex-direction: column;
     padding: 40px 20px;
     text-align: center;
-    overflow-y: auto;
+    z-index: 100;
 }
 
 .profile-icon {
     width: 80px;
     height: 80px;
-    background-color: #eee;
     border-radius: 50%;
     margin: 0 auto 30px;
     overflow: hidden;
+    background: #f0f0f0;
 }
 
 .profile-icon img { width: 100%; height: 100%; object-fit: cover; }
@@ -99,7 +51,7 @@ body, html {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 .side-menu a {
@@ -111,104 +63,121 @@ body, html {
     transition: 0.3s;
 }
 
-.side-menu a:hover { color: var(--accent); }
+.nav-btn-orange {
+    color: var(--orange-accent) !important;
+    border: 1px solid var(--orange-accent);
+    padding: 8px 15px;
+    border-radius: 20px;
+}
 
-.cart-btn {
+.cart-btn-orange {
     background: none;
-    border: 2px solid var(--text-color);
-    padding: 10px;
+    border: 2px solid var(--orange-accent);
+    color: var(--orange-accent);
+    padding: 12px;
     border-radius: 50%;
     cursor: pointer;
-    margin-bottom: 40px;
+    transition: 0.3s;
+    margin: 0 auto 40px;
+    display: flex;
+    align-items: center;
+}
+
+.cart-btn-orange:hover {
+    background-color: var(--orange-accent);
+    color: white;
 }
 
 .side-contacts {
-    margin-top: auto; /* Прижимает контакты к низу */
+    margin-top: auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 10px;
-}
+.social-icons { display: flex; justify-content: center; gap: 10px; margin-bottom: 5px; }
+.social-icons a { text-decoration: none; font-weight: bold; color: var(--text-color); font-size: 12px; }
+.contact-link { text-decoration: none; color: var(--text-color); font-size: 13px; }
 
-.social-icons a {
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: bold;
-    color: var(--text-color);
-}
-
-.contact-link {
-    text-decoration: none;
-    color: var(--text-color);
-    font-size: 13px;
-}
-
-.lang-switcher {
-    margin-top: 15px;
-}
-
-.lang-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    color: var(--text-color);
-    opacity: 0.5;
-}
-
+.lang-btn { background: none; border: none; cursor: pointer; font-weight: bold; opacity: 0.5; color: var(--text-color); }
 .lang-btn.active { opacity: 1; text-decoration: underline; }
 
-/* --- ПРАВАЯ ПАНЕЛЬ (80%) --- */
+/* --- SLIDER (80%) --- */
 .slider-section {
     width: 80%;
-    background-image: url('assets/img/hero-bg.jpg'); /* Сюда фотку печенья */
-    background-size: cover;
-    background-position: center;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 100vh;
 }
 
+.slides-container {
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    
+    /* Позиционирование кнопки снизу */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 100px; /* Расстояние, чтобы кнопка была над точками */
+}
+
+.slide.active { opacity: 1; z-index: 1; }
+
 .btn-catalog-center {
-    background-color: var(--text-color);
+    background-color: var(--orange-accent);
     color: white;
-    padding: 20px 40px;
+    padding: 18px 45px;
     border: none;
     border-radius: 50px;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 25px rgba(255, 140, 0, 0.4);
     transition: 0.3s;
+    z-index: 10;
 }
 
-.btn-catalog-center:hover { background-color: var(--accent); transform: translateY(-5px); }
+.btn-catalog-center:hover { transform: scale(1.05); background-color: #e67e00; }
 
 .slider-dots {
     position: absolute;
-    bottom: 30px;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    gap: 10px;
+    gap: 15px;
+    z-index: 20;
 }
 
 .dot {
-    width: 10px;
-    height: 10px;
-    background: white;
+    width: 12px;
+    height: 12px;
+    background-color: white;
     border-radius: 50%;
+    cursor: pointer;
     opacity: 0.5;
+    transition: 0.3s;
 }
 
-.dot.active { opacity: 1; transform: scale(1.3); }
+.dot.active {
+    opacity: 1;
+    background-color: var(--orange-accent);
+    transform: scale(1.3);
+}
 
-/* --- АДАПТИВНОСТЬ --- */
+/* Адаптивность для мобильных */
 @media (max-width: 1024px) {
     .main-container { flex-direction: column; }
     .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid #ddd; }
